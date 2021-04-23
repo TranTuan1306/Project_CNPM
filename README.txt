@@ -11,5 +11,8 @@ Danh sách các yêu cầu của đề tài:
   - Nhắc nhở tới thời gian tập: thông báo khi tới thời gian tập luyện.
   
 Hướng dẫn sử dụng:
-1.
-2.
+- Backend use firebase 
+- Install and set up flutter: https://flutter.dev/docs/get-started/install
+- Clone this repository: git clone https://github.com/TranTuan1306/Project_CNPM.git
+- cd into the repo folder.
+- run flutter run-android or flutter run-ios to build the app.
