@@ -9,6 +9,7 @@ import 'blocs/authentication_bloc/authentication_state.dart';
 import 'blocs/simple_bloc_observer.dart';
 import 'repositories/user_repository.dart';
 import 'screens/home_screen.dart';
+import 'screens/page/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
           }
 
           if (state is AuthenticationSuccess) {
-            return HomeScreen(
+            return HomePage(
               user: state.firebaseUser,
             );
           }

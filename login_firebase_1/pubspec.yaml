@@ -28,6 +28,7 @@ dependencies:
   intl: ^0.17.0
   json_annotation: ^3.1.1
   charts_flutter: ^0.10.0
+  video_player: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -41,5 +42,6 @@ flutter:
   generate: true
 
   assets:
+    - assets/
     - assets/images/
     - assets/icons/
