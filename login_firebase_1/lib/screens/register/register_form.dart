@@ -5,6 +5,7 @@ import 'package:login_firebase_1/blocs/authentication_bloc/authentication_event.
 import 'package:login_firebase_1/blocs/register_bloc/register_bloc.dart';
 import 'package:login_firebase_1/blocs/register_bloc/register_event.dart';
 import 'package:login_firebase_1/blocs/register_bloc/register_state.dart';
+import 'package:login_firebase_1/models/user_register_models/user_register_model.dart';
 import 'package:login_firebase_1/widgets/gradient_button.dart';
 
 class RegisterForm extends StatefulWidget {
@@ -13,11 +14,14 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<RegisterForm> {
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   bool get isPopulated =>
-      _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty;
+      _nameController.text.isNotEmpty &&
+      _emailController.text.isNotEmpty &&
+      _passwordController.text.isNotEmpty;
 
   bool isButtonEnabled(RegisterState state) {
     return state.isFormValid && isPopulated && !state.isSubmitting;
@@ -38,7 +42,7 @@ class _LoginFormState extends State<RegisterForm> {
     return BlocListener<RegisterBloc, RegisterState>(
       listener: (context, state) {
         if (state.isFailure) {
-          Scaffold.of(context)
+          ScaffoldMessenger.of(context)
             ..removeCurrentSnackBar()
             ..showSnackBar(
               SnackBar(
@@ -55,7 +59,7 @@ class _LoginFormState extends State<RegisterForm> {
         }
 
         if (state.isSubmitting) {
-          Scaffold.of(context)
+          ScaffoldMessenger.of(context)
             ..removeCurrentSnackBar()
             ..showSnackBar(
               SnackBar(
@@ -74,9 +78,6 @@ class _LoginFormState extends State<RegisterForm> {
         }
 
         if (state.isSuccess) {
-          BlocProvider.of<AuthenticationBloc>(context).add(
-            AuthenticationLoggedIn(),
-          );
           Navigator.pop(context);
         }
       },
@@ -88,6 +89,13 @@ class _LoginFormState extends State<RegisterForm> {
               child: Column(
                 children: <Widget>[
                   TextFormField(
+                    controller: _nameController,
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.account_box),
+                      labelText: "Name",
+                    ),
+                  ),
+                  TextFormField(
                     controller: _emailController,
                     decoration: InputDecoration(
                       icon: Icon(Icons.email),
@@ -97,7 +105,7 @@ class _LoginFormState extends State<RegisterForm> {
                     autovalidate: true,
                     autocorrect: false,
                     validator: (_) {
-                      // print("objectdsadsabdjsajdsjkdlnsadksa");
+                      print("objectdsadsabdjsajdsjkdlnsadksa");
                       return !state.isEmailValid ? 'Invalid Email' : null;
                     },
                   ),
@@ -111,7 +119,6 @@ class _LoginFormState extends State<RegisterForm> {
                     autovalidate: true,
                     autocorrect: false,
                     validator: (_) {
-                      // print("chiến");
                       return !state.isPasswordValid ? 'Invalid Password' : null;
                     },
                   ),
@@ -159,7 +166,11 @@ class _LoginFormState extends State<RegisterForm> {
   }
 
   void _onFormSubmitted() {
-    _registerBloc.add(RegisterSubmitted(
-        email: _emailController.text, password: _passwordController.text));
+    final UserRegisterModel userRegisterModel = UserRegisterModel(
+      name: _nameController.text,
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
+    _registerBloc.add(RegisterSubmitted(userRegisterModel: userRegisterModel));
   }
 }

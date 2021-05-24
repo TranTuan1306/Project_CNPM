@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:login_firebase_1/models/user_register_models/user_register_model.dart';
 
 abstract class RegisterEvent extends Equatable {
   @override
@@ -24,11 +25,9 @@ class RegisterPasswordChanged extends RegisterEvent {
 }
 
 class RegisterSubmitted extends RegisterEvent {
-  final String email;
-  final String password;
-
-  RegisterSubmitted({this.email, this.password});
+  final UserRegisterModel userRegisterModel;
+  RegisterSubmitted({this.userRegisterModel});
 
   @override
-  List<Object> get props => [email, password];
+  List<Object> get props => [userRegisterModel];
 }

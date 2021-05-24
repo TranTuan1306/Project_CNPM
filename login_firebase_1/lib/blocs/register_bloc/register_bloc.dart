@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:login_firebase_1/models/user_register_models/user_register_model.dart';
 import 'package:login_firebase_1/repositories/user_repository.dart';
 import 'package:login_firebase_1/utils/validators.dart';
 
@@ -20,7 +21,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       yield* _mapRegisterPasswordChangeToState(event.password);
     } else if (event is RegisterSubmitted) {
       yield* _mapRegisterSubmittedToState(
-          email: event.email, password: event.password);
+          userRegisterModel: event.userRegisterModel);
     }
   }
 
@@ -34,13 +35,12 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   }
 
   Stream<RegisterState> _mapRegisterSubmittedToState(
-      {String email, String password}) async* {
+      {UserRegisterModel userRegisterModel}) async* {
     yield RegisterState.loading();
     try {
-      await _userRepository.signUp(email, password);
+      await _userRepository.signUp(userRegisterModel);
       yield RegisterState.success();
     } catch (error) {
-      print(error);
       yield RegisterState.failure();
     }
   }

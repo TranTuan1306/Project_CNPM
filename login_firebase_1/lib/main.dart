@@ -7,30 +7,19 @@ import 'blocs/authentication_bloc/authentication_bloc.dart';
 import 'blocs/authentication_bloc/authentication_event.dart';
 import 'blocs/authentication_bloc/authentication_state.dart';
 import 'blocs/simple_bloc_observer.dart';
-import 'blocs_test/cubit.dart';
-import 'constant.dart';
 import 'repositories/user_repository.dart';
-import 'screens/home/home_screen.dart';
-
-// void main() async {
-//   final cubit = CounterCubit();
-//   final subscription = cubit.stream.listen(print); // 1
-//   cubit.increment();
-//   await Future.delayed(Duration.zero);
-//   await subscription.cancel();
-//   await cubit.close();
-// }
+import 'screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   Bloc.observer = SimpleBlocObserver();
   final UserRepository userRepository = UserRepository();
-  print(userRepository);
   runApp(
     BlocProvider(
-      create: (context) => AuthenticationBloc(userRepository: userRepository)
-        ..add(AuthenticationStarted()),
+      create: (context) => AuthenticationBloc(
+        userRepository: userRepository,
+      )..add(AuthenticationStarted()),
       child: MyApp(userRepository: userRepository),
     ),
   );
@@ -46,14 +35,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        scaffoldBackgroundColor: kBackgroundColor,
-        primaryColor: kPrimaryColor,
-        textTheme: Theme.of(context).textTheme.apply(bodyColor: kTextColor),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+        primaryColor: Color(0xff6a515e),
       ),
       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, state) {
-          print(state);
           if (state is AuthenticationFailure) {
             return LoginScreen(
               userRepository: _userRepository,
