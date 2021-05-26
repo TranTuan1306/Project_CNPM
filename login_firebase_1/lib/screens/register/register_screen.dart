@@ -20,7 +20,7 @@ class RegisterScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
         iconTheme: IconThemeData(
-          color: Color(0xff6a515e),
+          color: Color(0xFFff6369),
         ),
       ),
       body: BlocProvider<RegisterBloc>(
@@ -53,7 +53,7 @@ class RegisterScreen extends StatelessWidget {
                       'Register',
                       style: TextStyle(
                         fontSize: 40,
-                        color: Color(0xff6a515e),
+                        color: Color(0xFFff6369),
                       ),
                     ),
                   ),
