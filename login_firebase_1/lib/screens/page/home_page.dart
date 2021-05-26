@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
       title: Text(
         'Exercise - ${user.user_name}',
         style: TextStyle(
-          fontSize: 25,
+          fontSize: 22,
           fontWeight: FontWeight.w500,
           color: Colors.white,
         ),

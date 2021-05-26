@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:login_firebase_1/blocs/authentication_bloc/authentication_bloc.dart';
+import 'package:login_firebase_1/blocs/authentication_bloc/authentication_event.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -22,7 +25,8 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         title: Text(
           "Settings",
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+          style: TextStyle(
+              fontSize: 22, color: Colors.white, fontWeight: FontWeight.w500),
         ),
       ),
       body: Container(
@@ -89,16 +93,22 @@ class _SettingsPageState extends State<SettingsPage> {
               height: 50,
             ),
             Center(
-              child: OutlineButton(
-                padding: EdgeInsets.symmetric(horizontal: 40),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                onPressed: () {},
-                child: Text("SIGN OUT",
-                    style: TextStyle(
-                        fontSize: 16, letterSpacing: 2.2, color: Colors.black)),
+                child: RaisedButton(
+              onPressed: () {
+                BlocProvider.of<AuthenticationBloc>(context)
+                    .add(AuthenticationLoggedOut());
+              },
+              color: Color(0xFFff6369),
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              child: Text(
+                "SIGN OUT",
+                style: TextStyle(
+                    fontSize: 14, letterSpacing: 2.2, color: Colors.white),
               ),
-            )
+            ))
           ],
         ),
       ),

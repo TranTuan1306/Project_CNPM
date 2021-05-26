@@ -12,13 +12,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        // elevation: 1,
+        elevation: 0,
         title: Text(
           "Edit Profile",
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.w500,
+            color: Colors.white,
+          ),
         ),
         leading: IconButton(
+          color: Colors.white,
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
@@ -100,7 +104,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ),
               buildTextField("Full Name", "Nguyễn Công Chiến", false),
               buildTextField("Gmail", "chien@gmail.com", false),
-              buildTextField("Phone", "TLV, Israel", false),
+              buildTextField("Phone", "0908080128", false),
               buildTextField("Your height", "170", false),
               buildTextField("Your weight", "68", false),
               SizedBox(
