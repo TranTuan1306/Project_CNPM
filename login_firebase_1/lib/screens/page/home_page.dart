@@ -1,7 +1,5 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:login_firebase_1/blocs/authentication_bloc/authentication_bloc.dart';
-import 'package:login_firebase_1/blocs/authentication_bloc/authentication_event.dart';
 import 'package:login_firebase_1/models/user_models/user_model.dart';
+import 'package:login_firebase_1/screens/pages_profile/profile_screen.dart';
 import 'package:login_firebase_1/widget/exercises_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -25,18 +23,33 @@ class HomePage extends StatelessWidget {
   SliverAppBar buildAppBar(BuildContext context) {
     return SliverAppBar(
       stretch: true,
-      title: Text('Exercise - ${user.user_name}'),
+      title: Text(
+        'Exercise - ${user.user_name}',
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.w500,
+          color: Colors.white,
+        ),
+      ),
       centerTitle: true,
       pinned: true,
       leading: IconButton(
+        color: Colors.white,
         icon: Icon(Icons.menu),
-        onPressed: () {
-          BlocProvider.of<AuthenticationBloc>(context)
-              .add(AuthenticationLoggedOut());
-        },
+        onPressed: () {},
       ),
       actions: [
-        IconButton(icon: Icon(Icons.person, size: 28), onPressed: () {}),
+        IconButton(
+          color: Colors.white,
+          icon: Icon(Icons.person, size: 28),
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) => ProfileScreen(),
+              ),
+            );
+          },
+        ),
       ],
     );
   }
